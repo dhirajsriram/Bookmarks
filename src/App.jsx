@@ -12,8 +12,8 @@ function App() {
       <header className="App-header">
       <Menu/>
       <Route path="/" exact component={Home} />
-      <Route path="/about/" component={Categories} />
-      <Route path="/users/" component={Bookmarks} />
+      <Route path="/categories" component={Categories} />
+      <Route path="/bookmarks" component={Bookmarks} />
       </header>
     </div>
   );

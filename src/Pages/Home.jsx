@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Book from "../common/Book"
 import Grid from '@material-ui/core/Grid';
+import Loader from "../common/Loader";
+
 const useStyles = makeStyles((theme) => ({
 	home: {
 		textAlign: 'center',
@@ -31,17 +33,15 @@ const Home = () => {
 		<div className={classes.home}>
 			<h1>Welcome to this sample book app!</h1>
 			<div className={classes.root}>
-				{console.log(books)}
 				<Grid container spacing={3}>
-					{console.log(books)}
-					{books.totalItems &&
+					{books.totalItems ?
 						books.items.map((book, index) => {
 							return (
 								<Grid item xs={12} md={3} key={index}>
 									<Book info={book}></Book>
 								</Grid>
 							);
-						})}
+						}) : <Loader></Loader>}
 				</Grid>
 			</div>
 		</div>

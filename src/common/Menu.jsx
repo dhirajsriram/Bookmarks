@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
-
+import {Link} from "react-router-dom"
 const useStyles = makeStyles((theme) => ({
 	root: {
         flexGrow: 1
@@ -26,17 +26,17 @@ export default function MenuAppBar() {
 				<Toolbar>
 					<Typography variant="h6" className={classes.title}>
 						<Button color="default" className={classes.button}>
-							Home
+							<Link to="/" className="default-text">Home</Link>
 						</Button>
 					</Typography>
 					<Typography variant="h6" className={classes.title}>
 						<Button color="default" className={classes.button}>
-							Categories
+						<Link to="/categories" className="default-text">Categories</Link>
 						</Button>
 					</Typography>
 					<Typography variant="h6" className={classes.title}>
 						<Button color="default" className={classes.button}>
-							Bookmarks
+						<Link to="/bookmarks" className="default-text">Bookmarks</Link>
 						</Button>
 					</Typography>
 					{auth && (
