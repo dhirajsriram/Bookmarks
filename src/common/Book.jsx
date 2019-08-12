@@ -20,17 +20,15 @@ const useStyles = makeStyles((theme) => ({
 	card: {
 		maxWidth: 345
 	},
-	pointer:{
-		
-	},
+	pointer: {},
 	media: {
 		height: 0,
 		paddingTop: '56.25%',
 		backgroundSize: 'auto', // 16:9
-		cursor:"pointer"
+		cursor: 'pointer'
 	},
-	header:{
-		cursor:"pointer"
+	header: {
+		cursor: 'pointer'
 	},
 	expand: {
 		transform: 'rotate(0deg)',
@@ -47,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const Book = (props)=>{
+const Book = (props) => {
 	const classes = useStyles();
 	const [ expanded, setExpanded ] = React.useState(false);
 
@@ -55,28 +53,42 @@ const Book = (props)=>{
 		setExpanded(!expanded);
 	}
 
-	function handleFavourite(){	
+	function handleFavourite() {
 		var lang = props.info;
-        props.onBookmark(lang);    
+		props.onBookmark(lang);
 	}
 
-	function handleFavouriteDelete(){	
+	function handleFavouriteDelete() {
 		var lang = props.info;
-        props.onBookmarkDelete(lang);    
+		props.onBookmarkDelete(lang);
 	}
 
-
-	function handleBookClick(){
-		props.history.push("/book/"+props.info.id)
+	function handleBookClick() {
+		props.history.push('/book/' + props.info.id);
 	}
 
 	return (
 		<Card className={classes.card} color="primary">
-			<CardHeader onClick={()=>handleBookClick()} className={classes.header} title={props.info.volumeInfo.title} />
-			<CardMedia onClick={()=>handleBookClick()} className={classes.media} image={props.info.volumeInfo.imageLinks.thumbnail} />
+			<CardHeader
+				onClick={() => handleBookClick()}
+				className={classes.header}
+				title={props.info.volumeInfo.title}
+			/>
+			<CardMedia
+				onClick={() => handleBookClick()}
+				className={classes.media}
+				image={props.info.volumeInfo.imageLinks.thumbnail}
+			/>
 			<CardActions disableSpacing>
-				
-					{window.location.pathname.indexOf("bookmarks") > -1 ?<IconButton onClick={(e) => handleFavouriteDelete()}><DeleteIcon/></IconButton>:<IconButton onClick={(e) => handleFavourite()}><FavoriteIcon/></IconButton>}
+				{window.location.pathname.indexOf('bookmarks') > -1 ? (
+					<IconButton onClick={(e) => handleFavouriteDelete()}>
+						<DeleteIcon />
+					</IconButton>
+				) : (
+					<IconButton onClick={(e) => handleFavourite()}>
+						<FavoriteIcon />
+					</IconButton>
+				)}
 				<IconButton
 					className={clsx(classes.expand, {
 						[classes.expandOpen]: expanded
@@ -98,6 +110,6 @@ const Book = (props)=>{
 			</Collapse>
 		</Card>
 	);
-}
+};
 
-export default withRouter(Book)
+export default withRouter(Book);
