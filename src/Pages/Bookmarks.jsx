@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Loader from "../common/Loader";
+import Book from "../common/Book"
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
 	home: {
@@ -14,24 +16,30 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const Bookmarks = () => {
-	const [ books ] = useState({});
+const Bookmarks = (props) => {
 	
 	const classes = useStyles();
 	return (
+		<Container>
 		<div className={classes.home}>
 			<h1>Bookmarks</h1>
 			<div className={classes.root}>
-				<Grid container spacing={3} margin={2}>
-					{books.totalItems ?
-						books.items.map((book, index) => {
-							return (
-								<div></div>
-							);
-						}) : <Loader></Loader>}
-				</Grid>
+			<Grid container spacing={3}>
+						{props.books.length > 0 ? (
+							props.books.map((book, index) => {
+								return (
+									<Grid item xs={12} md={3} key={index}>
+										<Book info={book} />
+									</Grid>
+								);
+							})
+						) : (
+							<Loader />
+						)}
+					</Grid>
 			</div>
 		</div>
+		</Container>
 	);
 };
 

@@ -1,4 +1,4 @@
-import React , {useEffect} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -47,6 +47,8 @@ export default function Book(props) {
 	}
 
 	function handleFavourite(){
+		var lang = props.info;
+        props.onBookmark(lang);    
 	}
 
 	return (
@@ -54,7 +56,7 @@ export default function Book(props) {
 			<CardHeader className={classes.header} title={props.info.volumeInfo.title} />
 			<CardMedia className={classes.media} image={props.info.volumeInfo.imageLinks.thumbnail} />
 			<CardActions disableSpacing>
-				<IconButton aria-label="add to favorites" onClick={handleFavourite}>
+				<IconButton aria-label="add to favorites" onClick={(e) => handleFavourite()}>
 					<FavoriteIcon />
 				</IconButton>
 				<IconButton

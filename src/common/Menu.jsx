@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Badge from '@material-ui/core/Badge';
 import { withRouter } from "react-router";
 
 const useStyles = makeStyles({
@@ -56,7 +57,11 @@ const Menu = (props) => {
       >
         <Tab label="Home" />
         <Tab label="Categories" />
-        <Tab label="Bookmarks" />
+        <Tab label={
+              <Badge className={classes.padding} color="secondary" badgeContent={props.count}>
+                Bookmarks
+              </Badge>
+            } />
       </Tabs>
     </Paper>
   );

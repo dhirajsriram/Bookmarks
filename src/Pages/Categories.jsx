@@ -20,18 +20,28 @@ const Categories = (props) => {
 	const [ books, setBooks ] = useState([]);
 	const [ categories, setCategories ] = useState([]);
 	const [ bookList, setBookList ] = useState({});
-
-	useEffect(() => {
-		setBooks(props.books);
-		let arr = [];
-		for (let x in props.books.items) {
-			if (props.books.items[x].volumeInfo && props.books.items[x].volumeInfo.categories) {
-				arr.push(props.books.items[x].volumeInfo.categories[0]);
+	const [ bookmarks, setBookmarks ] = React.useState([]);
+	function handleBookmark(value) {
+		setBookmarks([ ...bookmarks, value ]);
+	}
+	let onBookmark = props.onBookmark;
+	useEffect(
+		() => {
+			setBooks(props.books);
+			let arr = [];
+			for (let x in props.books.items) {
+				if (props.books.items[x].volumeInfo && props.books.items[x].volumeInfo.categories) {
+					arr.push(props.books.items[x].volumeInfo.categories[0]);
+				}
 			}
-		}
-		arr =  [...new Set(arr)]
-		setCategories(arr);
-	},[props.books]);
+			arr = [ ...new Set(arr) ];
+			setCategories(arr);
+			if (bookmarks.length > 0) {
+				onBookmark(bookmarks);
+			}
+		},
+		[ props.books, bookmarks, onBookmark ]
+	);
 
 	function handleCategory(category) {
 		var x = books.items.filter(
@@ -72,7 +82,7 @@ const Categories = (props) => {
 							{bookList.map((book, index) => {
 								return (
 									<Grid item xs={12} md={3} key={index}>
-										<Book info={book} />
+										<Book onBookmark={handleBookmark} info={book} />
 									</Grid>
 								);
 							})}

@@ -5,29 +5,26 @@ import Home from './Pages/Home';
 import Bookmarks from './Pages/Bookmarks';
 import Categories from './Pages/Categories';
 import { Route } from 'react-router-dom';
-import { withRouter } from "react-router";
+import { withRouter } from 'react-router';
 import Snackbar from '@material-ui/core/Snackbar';
 
 function App() {
 	const [ books, setBooks ] = useState({});
-	const [state, setState] = React.useState({
+	const [ state, setState ] = React.useState({
 		open: false,
 		vertical: 'top',
-		horizontal: 'center',
-	  });
-	
-	  const { vertical, horizontal, open } = state;
-	
-	  const handleClick = newState => () => {
-		setState({ open: true, ...newState });
-	  };
-	
-	  function handleClose() {
+		horizontal: 'center'
+	});
+	const [bookmarks,setBookmarks] = useState([])
+
+	const { vertical, horizontal, open } = state;
+
+	function handleClose() {
 		setState({ ...state, open: false });
-	  }
+	}
 	useEffect(() => {
 		fetchBooks();
-	},[]);
+	}, []);
 
 	function fetchBooks() {
 		fetch('https://content.googleapis.com/books/v1/volumes?maxResults=40&q=harry').then(function(response) {
@@ -37,25 +34,31 @@ function App() {
 		});
 	}
 
+	function handleBookmarks(value) {
+		console.log(value)
+		setBookmarks(value)
+	}
+
 	return (
 		<div className="App">
 			<header className="App-header">
-				<Menu />
-				
+				<Menu count={bookmarks.length}/>
 			</header>
-			<Route path="/" exact render={(props) =><Home books={books}></Home>} />
-				<Route path="/categories" render={(props) =><Categories books={books}></Categories>} />
-				<Route path="/bookmarks" render={(props) =><Bookmarks books={books}></Bookmarks>} />
+			<Route path="/" exact render={(props) => <Home onBookmark={handleBookmarks} books={books} />} />
+			<Route path="/categories" render={(props) => <Categories onBookmark={handleBookmarks} books={books}/>} />
+			<Route path="/bookmarks" render={(props) => <Bookmarks books={bookmarks} />} />
+			<div>
 			<Snackbar
-        anchorOrigin={{ vertical, horizontal }}
-        key={`${vertical},${horizontal}`}
-        open={open}
-        onClose={handleClose}
-        ContentProps={{
-          'aria-describedby': 'message-id',
-        }}
-        message={<span id="message-id">I love snacks</span>}
-      />
+				anchorOrigin={{ vertical, horizontal }}
+				key={`${vertical},${horizontal}`}
+				open={open}
+				onClose={handleClose}
+				ContentProps={{
+					'aria-describedby': 'message-id'
+				}}
+				message={<span id="message-id">Book added to bookmarks</span>}
+			/>
+			</div>
 		</div>
 	);
 }
