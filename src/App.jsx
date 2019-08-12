@@ -6,8 +6,25 @@ import Bookmarks from './Pages/Bookmarks';
 import Categories from './Pages/Categories';
 import { Route } from 'react-router-dom';
 import { withRouter } from "react-router";
+import Snackbar from '@material-ui/core/Snackbar';
+
 function App() {
 	const [ books, setBooks ] = useState({});
+	const [state, setState] = React.useState({
+		open: false,
+		vertical: 'top',
+		horizontal: 'center',
+	  });
+	
+	  const { vertical, horizontal, open } = state;
+	
+	  const handleClick = newState => () => {
+		setState({ open: true, ...newState });
+	  };
+	
+	  function handleClose() {
+		setState({ ...state, open: false });
+	  }
 	useEffect(() => {
 		fetchBooks();
 	},[]);
@@ -24,10 +41,21 @@ function App() {
 		<div className="App">
 			<header className="App-header">
 				<Menu />
-				<Route path="/" exact render={(props) =><Home books={books}></Home>} />
+				
+			</header>
+			<Route path="/" exact render={(props) =><Home books={books}></Home>} />
 				<Route path="/categories" render={(props) =><Categories books={books}></Categories>} />
 				<Route path="/bookmarks" render={(props) =><Bookmarks books={books}></Bookmarks>} />
-			</header>
+			<Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        key={`${vertical},${horizontal}`}
+        open={open}
+        onClose={handleClose}
+        ContentProps={{
+          'aria-describedby': 'message-id',
+        }}
+        message={<span id="message-id">I love snacks</span>}
+      />
 		</div>
 	);
 }

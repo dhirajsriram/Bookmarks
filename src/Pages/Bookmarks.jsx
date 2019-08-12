@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Book from "../common/Book"
 import Grid from '@material-ui/core/Grid';
 import Loader from "../common/Loader";
 
@@ -27,9 +26,7 @@ const Bookmarks = () => {
 					{books.totalItems ?
 						books.items.map((book, index) => {
 							return (
-								<Grid item xs={12} md={3} key={index}>
-									<Book info={book}></Book>
-								</Grid>
+								<div></div>
 							);
 						}) : <Loader></Loader>}
 				</Grid>

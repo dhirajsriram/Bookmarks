@@ -20,6 +20,7 @@ const Categories = (props) => {
 	const [ books, setBooks ] = useState([]);
 	const [ categories, setCategories ] = useState([]);
 	const [ bookList, setBookList ] = useState({});
+
 	useEffect(() => {
 		setBooks(props.books);
 		let arr = [];
