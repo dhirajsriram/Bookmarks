@@ -14,16 +14,12 @@ function App() {
 	const [ books, setBooks ] = useState({});
 	const [ state, setState ] = React.useState({
 		open: false,
-		vertical: 'top',
+		vertical: 'bottom',
 		horizontal: 'center'
 	});
 	const [ bookmarks, setBookmarks ] = useState([]);
 
 	const { vertical, horizontal, open } = state;
-
-	function handleClose() {
-		setState({ ...state, open: false });
-	}
 	useEffect(() => {
 		fetchBooks();
 	}, []);
@@ -37,13 +33,31 @@ function App() {
 	}
 
 	function handleBookmarks(value) {
+		setState({
+			open: true,
+			vertical: 'bottom',
+			horizontal: 'center',
+			error: false
+		});
 		if (bookmarks.length > 0) {
 			if (!bookmarks.find((x) => x.id === value.id)) {
 				setBookmarks([ ...bookmarks, value ]);
+			} else {
+				setState({
+					open: true,
+					vertical: 'bottom',
+					horizontal: 'center',
+					error: true
+				});
 			}
 		} else {
 			setBookmarks([ ...bookmarks, value ]);
 		}
+		setTimeout(() => {
+			setState({
+				open: false
+			});
+		}, 1000);
 	}
 
 	return (
@@ -55,21 +69,29 @@ function App() {
 			<Route
 				path="/book/:id"
 				render={(props) => (
-					<Description onBookmark={handleBookmarks} book={ books.items && books.items.filter((book) => book.id === window.location.pathname.replace('/book/',''))} />
+					<Description
+						onBookmark={handleBookmarks}
+						book={
+							books.items &&
+							books.items.filter((book) => book.id === window.location.pathname.replace('/book/', ''))
+						}
+					/>
 				)}
 			/>
 			<Route path="/categories" render={(props) => <Categories onBookmark={handleBookmarks} books={books} />} />
 			<Route path="/bookmarks" render={(props) => <Bookmarks books={bookmarks} />} />
 			<div>
 				<Snackbar
+					color="primary"
 					anchorOrigin={{ vertical, horizontal }}
 					key={`${vertical},${horizontal}`}
 					open={open}
-					onClose={handleClose}
 					ContentProps={{
 						'aria-describedby': 'message-id'
 					}}
-					message={<span id="message-id">Book added to bookmarks</span>}
+					message={
+						<div id="message-id">{state.error ? 'Book already present' : 'Book added to bookmarks'}</div>
+					}
 				/>
 			</div>
 		</div>
