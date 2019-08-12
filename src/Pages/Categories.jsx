@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Container } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Loader from '../common/Loader';
 import Book from '../common/Book';
+import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme) => ({
 	home: {
@@ -18,12 +19,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Categories = (props) => {
 	const [ books, setBooks ] = useState([]);
-	let bookmarks = []
+	let bookmarks = [];
 	const [ categories, setCategories ] = useState([]);
 	const [ bookList, setBookList ] = useState({});
 	function handleBookmark(value) {
-		bookmarks =value;
-		props.onBookmark(bookmarks)
+		bookmarks = value;
+		props.onBookmark(bookmarks);
 	}
 	let onBookmark = props.onBookmark;
 	useEffect(
@@ -57,15 +58,16 @@ const Categories = (props) => {
 					{categories.length > 0 ? (
 						categories.map((category, index) => {
 							return (
-								<Grid item xs={12} md={4} key={index}>
-									<Button
-										variant="outlined"
-										color="inherit"
-										className={classes.button}
+								<Grid item key={index}>
+									<Chip
+										label={category}
+										className={classes.chip}
+										component="a"
+										href="#chip"
+										clickable
 										onClick={(e) => handleCategory(category)}
-									>
-										{category}
-									</Button>
+										color="secondary"
+									/>
 								</Grid>
 							);
 						})

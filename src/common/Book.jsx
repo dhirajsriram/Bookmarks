@@ -10,7 +10,6 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Box from '@material-ui/core/Box';
@@ -49,10 +48,6 @@ const useStyles = makeStyles((theme) => ({
 const Book = (props) => {
 	const classes = useStyles();
 	const [ expanded, setExpanded ] = React.useState(false);
-
-	function handleExpandClick() {
-		setExpanded(!expanded);
-	}
 
 	function handleFavourite() {
 		var lang = props.info;
