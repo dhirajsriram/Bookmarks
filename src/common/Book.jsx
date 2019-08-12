@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Box from '@material-ui/core/Box';
 import { withRouter } from 'react-router';
 
@@ -54,10 +55,16 @@ const Book = (props)=>{
 		setExpanded(!expanded);
 	}
 
-	function handleFavourite(){
+	function handleFavourite(){	
 		var lang = props.info;
         props.onBookmark(lang);    
 	}
+
+	function handleFavouriteDelete(){	
+		var lang = props.info;
+        props.onBookmarkDelete(lang);    
+	}
+
 
 	function handleBookClick(){
 		props.history.push("/book/"+props.info.id)
@@ -68,9 +75,8 @@ const Book = (props)=>{
 			<CardHeader onClick={()=>handleBookClick()} className={classes.header} title={props.info.volumeInfo.title} />
 			<CardMedia onClick={()=>handleBookClick()} className={classes.media} image={props.info.volumeInfo.imageLinks.thumbnail} />
 			<CardActions disableSpacing>
-				<IconButton aria-label="add to favorites" onClick={(e) => handleFavourite()}>
-					<FavoriteIcon />
-				</IconButton>
+				
+					{window.location.pathname.indexOf("bookmarks") > -1 ?<IconButton onClick={(e) => handleFavouriteDelete()}><DeleteIcon/></IconButton>:<IconButton onClick={(e) => handleFavourite()}><FavoriteIcon/></IconButton>}
 				<IconButton
 					className={clsx(classes.expand, {
 						[classes.expandOpen]: expanded

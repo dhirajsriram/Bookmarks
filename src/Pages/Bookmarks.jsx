@@ -5,6 +5,7 @@ import Book from "../common/Book"
 import { Container } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
+let bookmarks = [];
 const useStyles = makeStyles((theme) => ({
 	home: {
 		textAlign: 'center',
@@ -20,8 +21,12 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
+
 const Bookmarks = (props) => {
-	
+	function handleBookmarkDelete(value) {
+		bookmarks =value;
+		props.onBookmarkDelete(bookmarks)
+	}
 	const classes = useStyles();
 	return (
 		<Container>
@@ -33,7 +38,7 @@ const Bookmarks = (props) => {
 							props.books.map((book, index) => {
 								return (
 									<Grid item xs={12} md={3} key={index}>
-										<Book info={book} />
+										<Book info={book} onBookmarkDelete={handleBookmarkDelete} />
 									</Grid>
 								);
 							})

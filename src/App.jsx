@@ -37,7 +37,7 @@ function App() {
 			open: true,
 			vertical: 'bottom',
 			horizontal: 'center',
-			error: false
+			message: "Book added to bookmarks ✔️"
 		});
 		if (bookmarks.length > 0) {
 			if (!bookmarks.find((x) => x.id === value.id)) {
@@ -47,7 +47,7 @@ function App() {
 					open: true,
 					vertical: 'bottom',
 					horizontal: 'center',
-					error: true
+					message: "Book already bookmarked ⚠️"
 				});
 			}
 		} else {
@@ -55,10 +55,38 @@ function App() {
 		}
 		setTimeout(() => {
 			setState({
-				open: false
+				open: false,
+				vertical: 'bottom',
+				horizontal: 'center'
 			});
 		}, 1000);
 	}
+
+	function handleBookmarksDelete(value){
+		setState({
+			open: true,
+			vertical: 'bottom',
+			horizontal: 'center',
+			message: false
+		});
+		if (bookmarks.length > 0) {
+			let bookmarkArr = bookmarks
+			bookmarkArr.splice(bookmarkArr.indexOf(bookmarks.find((x) => x.id === value.id)),1)
+			setState({
+				open: true,
+				vertical: 'bottom',
+				horizontal: 'center',
+				message: "Book removed from bookmarks ❌"
+			});
+		setTimeout(() => {
+			setState({
+				open: false,
+				vertical: 'bottom',
+				horizontal: 'center'
+			});
+		}, 1000);
+	}
+}
 
 	return (
 		<div className="App">
@@ -79,7 +107,7 @@ function App() {
 				)}
 			/>
 			<Route path="/categories" render={(props) => <Categories onBookmark={handleBookmarks} books={books} />} />
-			<Route path="/bookmarks" render={(props) => <Bookmarks books={bookmarks} />} />
+			<Route path="/bookmarks" render={(props) => <Bookmarks books={bookmarks} onBookmarkDelete={handleBookmarksDelete}/>} />
 			<div>
 				<Snackbar
 					color="primary"
@@ -90,7 +118,7 @@ function App() {
 						'aria-describedby': 'message-id'
 					}}
 					message={
-						<div id="message-id">{state.error ? 'Book already present' : 'Book added to bookmarks'}</div>
+						<div id="message-id">{state.message}</div>
 					}
 				/>
 			</div>
