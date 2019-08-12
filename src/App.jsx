@@ -5,11 +5,13 @@ import Home from './Pages/Home';
 import Bookmarks from './Pages/Bookmarks';
 import Categories from './Pages/Categories';
 import { Route } from 'react-router-dom';
+import { withRouter } from "react-router";
 function App() {
 	const [ books, setBooks ] = useState({});
 	useEffect(() => {
 		fetchBooks();
-	}, []);
+	},[]);
+
 	function fetchBooks() {
 		fetch('https://content.googleapis.com/books/v1/volumes?maxResults=40&q=harry').then(function(response) {
 			response.text().then(function(text) {
@@ -30,4 +32,4 @@ function App() {
 	);
 }
 
-export default App;
+export default withRouter(App);

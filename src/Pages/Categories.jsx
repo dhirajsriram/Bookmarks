@@ -21,14 +21,16 @@ const Categories = (props) => {
 	const [ categories, setCategories ] = useState([]);
 	const [ bookList, setBookList ] = useState({});
 	useEffect(() => {
-		fetchCategories();
-	},[]);
-
-	Array.prototype.unique = function() {
-		return this.filter(function(value, index, self) {
-			return self.indexOf(value) === index;
-		});
-	};
+		setBooks(props.books);
+		let arr = [];
+		for (let x in props.books.items) {
+			if (props.books.items[x].volumeInfo && props.books.items[x].volumeInfo.categories) {
+				arr.push(props.books.items[x].volumeInfo.categories[0]);
+			}
+		}
+		arr =  [...new Set(arr)]
+		setCategories(arr);
+	},[props.books]);
 
 	function handleCategory(category) {
 		var x = books.items.filter(
@@ -37,16 +39,6 @@ const Categories = (props) => {
 		setBookList(x);
 	}
 
-	function fetchCategories() {
-		setBooks(props.books);
-		let arr = [];
-		for (let x in props.books.items) {
-			if (props.books.items[x].volumeInfo && props.books.items[x].volumeInfo.categories) {
-				arr.push(props.books.items[x].volumeInfo.categories[0]);
-			}
-		}
-		setCategories(arr.unique());
-	}
 	const classes = useStyles();
 	return (
 		<div className={classes.home}>

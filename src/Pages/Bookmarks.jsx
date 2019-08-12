@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Book from "../common/Book"
 import Grid from '@material-ui/core/Grid';
@@ -16,18 +16,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Bookmarks = () => {
-	const [ books, setBooks ] = useState({});
-	useEffect(() => {
-		fetchBooks();
-	}, []);
-
-	function fetchBooks() {
-		fetch('https://content.googleapis.com/books/v1/volumes?maxResults=40&q=harry').then(function(response) {
-			response.text().then(function(text) {
-				setBooks(JSON.parse(text));
-			});
-		});
-	}
+	const [ books ] = useState({});
+	
 	const classes = useStyles();
 	return (
 		<div className={classes.home}>
