@@ -26,6 +26,13 @@ const useStyles = makeStyles((theme) => ({
 	},
 	favourite:{
 		color:"red"
+	},
+	author:{
+		fontStyle:"Italic",
+		color: "#3c3c3c9e"
+	},
+	description:{
+		marginTop:20
 	}
 }));
 
@@ -44,14 +51,15 @@ const Home = (props) => {
 				<Container>
 					<Paper className={classes.root}>
 						<Grid container justify="space-between">
-							<Grid item md={7}>
+							<Grid item md={8}>
 								<Typography variant="h4" fontWeight="fontWeightBold" component="h2">
 									{props.book[0].volumeInfo.title} 
 									<IconButton aria-label="add to favorites" color={props.bookmarks.some(bookmark => bookmark.id === props.book[0].id) ? "secondary":"default"} onClick={(e) => handleBookmark(props.book[0])}>
 										<FavoriteIcon />
 									</IconButton>
 								</Typography>
-								<Typography component="p">{props.book[0].volumeInfo.description}</Typography>
+								<Typography className={classes.author} component="p">- {props.book[0].volumeInfo.authors[0]}</Typography>
+								<Typography className={classes.description} component="p">{props.book[0].volumeInfo.description}</Typography>
 							</Grid>
 
 							<Grid item md={3}>

@@ -4,15 +4,12 @@ import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Box from '@material-ui/core/Box';
 import { withRouter } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
@@ -35,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 			duration: theme.transitions.duration.shortest
 		}),
 		fontStyle:"Italic",
-		color:"#3c3c3c"
+		color:"#3c3c3c9e"
 	},
 	expandOpen: {
 		transform: 'rotate(180deg)'
@@ -47,8 +44,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Book = (props) => {
 	const classes = useStyles();
-	const [ expanded, setExpanded ] = React.useState(false);
-
 	function handleFavourite() {
 		var lang = props.info;
 		props.onBookmark(lang);
@@ -86,19 +81,9 @@ const Book = (props) => {
 					</IconButton>
 				)}
 				<Typography fontStyle="italic"
-					className={clsx(classes.expand, {
-						[classes.expandOpen]: expanded
-					})}
+					className={clsx(classes.expand)}
 				>- {props.info.volumeInfo.authors[0]}</Typography>
 			</CardActions>
-			<Collapse in={expanded} timeout="auto" unmountOnExit>
-				<CardContent>
-					<Box fontWeight="fontWeightBold" fontSize={20} m={2}>
-						Description
-					</Box>
-					<Typography paragraph>{props.info.volumeInfo.description}</Typography>
-				</CardContent>
-			</Collapse>
 		</Card>
 	);
 };
