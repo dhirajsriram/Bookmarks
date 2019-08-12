@@ -12,3 +12,9 @@
 .MuiButton-colorInherit{
   width:100%
 }
+.MuiCardHeader-content span{
+  white-space: nowrap;
+  width: 94%;
+  overflow: hidden;
+  text-overflow: ellipsis !important;
+}

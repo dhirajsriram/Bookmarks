@@ -13,15 +13,23 @@ import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Box from '@material-ui/core/Box';
+import { withRouter } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
 	card: {
 		maxWidth: 345
 	},
+	pointer:{
+		
+	},
 	media: {
 		height: 0,
 		paddingTop: '56.25%',
-		backgroundSize: 'auto' // 16:9
+		backgroundSize: 'auto', // 16:9
+		cursor:"pointer"
+	},
+	header:{
+		cursor:"pointer"
 	},
 	expand: {
 		transform: 'rotate(0deg)',
@@ -38,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-export default function Book(props) {
+const Book = (props)=>{
 	const classes = useStyles();
 	const [ expanded, setExpanded ] = React.useState(false);
 
@@ -51,10 +59,14 @@ export default function Book(props) {
         props.onBookmark(lang);    
 	}
 
+	function handleBookClick(){
+		props.history.push("/book/"+props.info.id)
+	}
+
 	return (
 		<Card className={classes.card} color="primary">
-			<CardHeader className={classes.header} title={props.info.volumeInfo.title} />
-			<CardMedia className={classes.media} image={props.info.volumeInfo.imageLinks.thumbnail} />
+			<CardHeader onClick={()=>handleBookClick()} className={classes.header} title={props.info.volumeInfo.title} />
+			<CardMedia onClick={()=>handleBookClick()} className={classes.media} image={props.info.volumeInfo.imageLinks.thumbnail} />
 			<CardActions disableSpacing>
 				<IconButton aria-label="add to favorites" onClick={(e) => handleFavourite()}>
 					<FavoriteIcon />
@@ -81,3 +93,5 @@ export default function Book(props) {
 		</Card>
 	);
 }
+
+export default withRouter(Book)

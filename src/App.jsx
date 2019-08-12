@@ -4,6 +4,8 @@ import Menu from './common/Menu';
 import Home from './Pages/Home';
 import Bookmarks from './Pages/Bookmarks';
 import Categories from './Pages/Categories';
+import Description from './Pages/Description';
+
 import { Route } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -46,11 +48,16 @@ function App() {
 
 	return (
 		<div className="App">
-			{console.log(bookmarks)}
 			<header className="App-header">
 				<Menu count={bookmarks.length} />
 			</header>
 			<Route path="/" exact render={(props) => <Home onBookmark={handleBookmarks} books={books} />} />
+			<Route
+				path="/book/:id"
+				render={(props) => (
+					<Description onBookmark={handleBookmarks} book={ books.items && books.items.filter((book) => book.id === window.location.pathname.replace('/book/',''))} />
+				)}
+			/>
 			<Route path="/categories" render={(props) => <Categories onBookmark={handleBookmarks} books={books} />} />
 			<Route path="/bookmarks" render={(props) => <Bookmarks books={bookmarks} />} />
 			<div>

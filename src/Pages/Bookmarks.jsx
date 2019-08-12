@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Loader from "../common/Loader";
 import Book from "../common/Book"
 import { Container } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
 	home: {
@@ -13,6 +13,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 	menuButton: {
 		marginRight: theme.spacing(2)
+	},
+	error :{
+		fontSize:20,
+		margin:"auto"
 	}
 }));
 
@@ -34,7 +38,9 @@ const Bookmarks = (props) => {
 								);
 							})
 						) : (
-							<Loader />
+							<Typography align="center" className={classes.error} variant="h4" component="h4">
+							There are no books added to the bookmarks yet. Add some to view them here
+						</Typography>
 						)}
 					</Grid>
 			</div>
