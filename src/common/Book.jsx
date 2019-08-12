@@ -23,8 +23,7 @@ const useStyles = makeStyles((theme) => ({
 	pointer: {},
 	media: {
 		height: 0,
-		paddingTop: '56.25%',
-		backgroundSize: 'auto', // 16:9
+		paddingTop: '56.25%', // 16:9
 		cursor: 'pointer'
 	},
 	header: {
@@ -35,7 +34,9 @@ const useStyles = makeStyles((theme) => ({
 		marginLeft: 'auto',
 		transition: theme.transitions.create('transform', {
 			duration: theme.transitions.duration.shortest
-		})
+		}),
+		fontStyle:"Italic",
+		color:"#3c3c3c"
 	},
 	expandOpen: {
 		transform: 'rotate(180deg)'
@@ -89,16 +90,11 @@ const Book = (props) => {
 						<FavoriteIcon />
 					</IconButton>
 				)}
-				<IconButton
+				<Typography fontStyle="italic"
 					className={clsx(classes.expand, {
 						[classes.expandOpen]: expanded
 					})}
-					onClick={handleExpandClick}
-					aria-expanded={expanded}
-					aria-label="show more"
-				>
-					<ExpandMoreIcon />
-				</IconButton>
+				>- {props.info.volumeInfo.authors[0]}</Typography>
 			</CardActions>
 			<Collapse in={expanded} timeout="auto" unmountOnExit>
 				<CardContent>

@@ -26,7 +26,7 @@ function App() {
 
 	const { vertical, horizontal, open } = state;
 	useEffect(() => {
-		fetch('https://content.googleapis.com/books/v1/volumes?maxResults=40&q=harry').then(function(response) {
+		fetch('https://content.googleapis.com/books/v1/volumes?maxResults=40&q=blinklist').then(function(response) {
 			response.text().then(function(text) {
 				setBooks(JSON.parse(text));
 			});

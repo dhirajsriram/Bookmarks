@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: 40
 	},
 	media:{
+		width : "100%",
 		"@media (max-width: 600px)": {
 			margin:"20px 0px"
 		  }
@@ -43,7 +44,7 @@ const Home = (props) => {
 				<Container>
 					<Paper className={classes.root}>
 						<Grid container justify="space-between">
-							<Grid item md={6}>
+							<Grid item md={7}>
 								<Typography variant="h4" fontWeight="fontWeightBold" component="h2">
 									{props.book[0].volumeInfo.title} 
 									<IconButton aria-label="add to favorites" color={props.bookmarks.some(bookmark => bookmark.id === props.book[0].id) ? "secondary":"default"} onClick={(e) => handleBookmark(props.book[0])}>
@@ -53,7 +54,7 @@ const Home = (props) => {
 								<Typography component="p">{props.book[0].volumeInfo.description}</Typography>
 							</Grid>
 
-							<Grid item md={2}>
+							<Grid item md={3}>
 								<img
 									className={classes.media}
 									alt="book-img"
