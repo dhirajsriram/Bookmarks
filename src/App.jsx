@@ -15,7 +15,7 @@ function App() {
 		vertical: 'top',
 		horizontal: 'center'
 	});
-	const [bookmarks,setBookmarks] = useState([])
+	const [ bookmarks, setBookmarks ] = useState([]);
 
 	const { vertical, horizontal, open } = state;
 
@@ -35,29 +35,35 @@ function App() {
 	}
 
 	function handleBookmarks(value) {
-		console.log(value)
-		setBookmarks(value)
+		if (bookmarks.length > 0) {
+			if (!bookmarks.find((x) => x.id === value.id)) {
+				setBookmarks([ ...bookmarks, value ]);
+			}
+		} else {
+			setBookmarks([ ...bookmarks, value ]);
+		}
 	}
 
 	return (
 		<div className="App">
+			{console.log(bookmarks)}
 			<header className="App-header">
-				<Menu count={bookmarks.length}/>
+				<Menu count={bookmarks.length} />
 			</header>
 			<Route path="/" exact render={(props) => <Home onBookmark={handleBookmarks} books={books} />} />
-			<Route path="/categories" render={(props) => <Categories onBookmark={handleBookmarks} books={books}/>} />
+			<Route path="/categories" render={(props) => <Categories onBookmark={handleBookmarks} books={books} />} />
 			<Route path="/bookmarks" render={(props) => <Bookmarks books={bookmarks} />} />
 			<div>
-			<Snackbar
-				anchorOrigin={{ vertical, horizontal }}
-				key={`${vertical},${horizontal}`}
-				open={open}
-				onClose={handleClose}
-				ContentProps={{
-					'aria-describedby': 'message-id'
-				}}
-				message={<span id="message-id">Book added to bookmarks</span>}
-			/>
+				<Snackbar
+					anchorOrigin={{ vertical, horizontal }}
+					key={`${vertical},${horizontal}`}
+					open={open}
+					onClose={handleClose}
+					ContentProps={{
+						'aria-describedby': 'message-id'
+					}}
+					message={<span id="message-id">Book added to bookmarks</span>}
+				/>
 			</div>
 		</div>
 	);

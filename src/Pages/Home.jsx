@@ -17,18 +17,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Home = (props) => {
-	const [ bookmarks, setBookmarks ] = React.useState([]);
+	let bookmarks = []
 	const classes = useStyles();
 	function handleBookmark(value) {
-		setBookmarks([ ...bookmarks, value ]);
+		bookmarks = value
+		props.onBookmark(bookmarks)
 	}
-    let onBookmark = props.onBookmark
-	React.useEffect(()=>{
-		if(bookmarks.length > 0){
-		onBookmark(bookmarks);
-	}
-	},[bookmarks,onBookmark])
-
+	
 	return (
 		<div className={classes.home}>
 			<Container>

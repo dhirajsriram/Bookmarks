@@ -18,11 +18,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Categories = (props) => {
 	const [ books, setBooks ] = useState([]);
+	let bookmarks = []
 	const [ categories, setCategories ] = useState([]);
 	const [ bookList, setBookList ] = useState({});
-	const [ bookmarks, setBookmarks ] = React.useState([]);
 	function handleBookmark(value) {
-		setBookmarks([ ...bookmarks, value ]);
+		bookmarks =value;
+		props.onBookmark(bookmarks)
 	}
 	let onBookmark = props.onBookmark;
 	useEffect(
@@ -36,11 +37,8 @@ const Categories = (props) => {
 			}
 			arr = [ ...new Set(arr) ];
 			setCategories(arr);
-			if (bookmarks.length > 0) {
-				onBookmark(bookmarks);
-			}
 		},
-		[ props.books, bookmarks, onBookmark ]
+		[ props.books, onBookmark ]
 	);
 
 	function handleCategory(category) {
