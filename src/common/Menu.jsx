@@ -9,6 +9,8 @@ import { withRouter } from "react-router";
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
+    backgroundColor:"#3c3c3c",
+    color:"white"
   },
 });
 

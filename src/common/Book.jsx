@@ -85,7 +85,7 @@ const Book = (props) => {
 						<DeleteIcon />
 					</IconButton>
 				) : (
-					<IconButton onClick={(e) => handleFavourite()}>
+					<IconButton color={props.bookmarks.some(bookmark => bookmark.id === props.info.id) ? "secondary":"default"} onClick={(e) => handleFavourite()}>
 						<FavoriteIcon />
 					</IconButton>
 				)}

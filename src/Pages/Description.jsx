@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 	menuButton: {
 		marginRight: theme.spacing(2)
+	},
+	favourite:{
+		color:"red"
 	}
 }));
 
@@ -43,7 +46,7 @@ const Home = (props) => {
 							<Grid item md={6}>
 								<Typography variant="h4" fontWeight="fontWeightBold" component="h2">
 									{props.book[0].volumeInfo.title} 
-									<IconButton aria-label="add to favorites" onClick={(e) => handleBookmark(props.book[0])}>
+									<IconButton aria-label="add to favorites" color={props.bookmarks.some(bookmark => bookmark.id === props.book[0].id) ? "secondary":"default"} onClick={(e) => handleBookmark(props.book[0])}>
 										<FavoriteIcon />
 									</IconButton>
 								</Typography>

@@ -74,11 +74,12 @@ function App() {
 			<header className="App-header">
 				<Menu count={bookmarks.length} />
 			</header>
-			<Route path="/" exact render={(props) => <Home onBookmark={handleBookmarks} books={books} />} />
+			<Route path="/" exact render={(props) => <Home bookmarks={bookmarks} onBookmark={handleBookmarks} books={books} />} />
 			<Route
 				path="/book/:id"
 				render={(props) => (
 					<Description
+					bookmarks={bookmarks}
 						onBookmark={handleBookmarks}
 						book={
 							books.items &&
@@ -87,7 +88,7 @@ function App() {
 					/>
 				)}
 			/>
-			<Route path="/categories" render={(props) => <Categories onBookmark={handleBookmarks} books={books} />} />
+			<Route path="/categories" render={(props) => <Categories onBookmark={handleBookmarks} books={books} bookmarks={bookmarks} />} />
 			<Route
 				path="/bookmarks"
 				render={(props) => <Bookmarks books={bookmarks} onBookmarkDelete={handleBookmarksDelete} />}
