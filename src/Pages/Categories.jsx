@@ -16,13 +16,13 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const Categories = () => {
+const Categories = (props) => {
 	const [ books, setBooks ] = useState([]);
 	const [ categories, setCategories ] = useState([]);
 	const [ bookList, setBookList ] = useState({});
 	useEffect(() => {
-		fetchBooks();
-	}, []);
+		fetchCategories();
+	},[]);
 
 	Array.prototype.unique = function() {
 		return this.filter(function(value, index, self) {
@@ -37,59 +37,56 @@ const Categories = () => {
 		setBookList(x);
 	}
 
-	function fetchBooks() {
-		fetch('https://content.googleapis.com/books/v1/volumes?maxResults=40&q=harry').then(function(response) {
-			response.text().then(function(text) {
-				var response = JSON.parse(text);
-				setBooks(response);
-				let arr = [];
-				for (let x in response.items) {
-					if (response.items[x].volumeInfo && response.items[x].volumeInfo.categories) {
-						arr.push(response.items[x].volumeInfo.categories[0]);
-					}
-				}
-				setCategories(arr.unique());
-			});
-		});
+	function fetchCategories() {
+		setBooks(props.books);
+		let arr = [];
+		for (let x in props.books.items) {
+			if (props.books.items[x].volumeInfo && props.books.items[x].volumeInfo.categories) {
+				arr.push(props.books.items[x].volumeInfo.categories[0]);
+			}
+		}
+		setCategories(arr.unique());
 	}
 	const classes = useStyles();
 	return (
 		<div className={classes.home}>
-			<h1>Categories</h1>
-			<Grid container spacing={1}>
-				{categories.length > 0 ? (
-					categories.map((category, index) => {
-						return (
-							<Grid item xs={12} md={2} key={index}>
-								<Button
-									variant="outlined"
-									color="inherit"
-									className={classes.button}
-									onClick={(e) => handleCategory(category)}
-								>
-									{category}
-								</Button>
-							</Grid>
-						);
-					})
-				) : (
-					<Loader />
-				)}
-			</Grid>
-			{bookList.length > 0 && (
-                <Container>
-                <h1>Books</h1>
-				<Grid container spacing={3}>
-					{bookList.map((book, index) => {
-						return (
-							<Grid item xs={12} md={3} key={index}>
-								<Book info={book} />
-							</Grid>
-						);
-					})}
+			<Container>
+				<h1>Categories</h1>
+				<Grid container spacing={1}>
+					{categories.length > 0 ? (
+						categories.map((category, index) => {
+							return (
+								<Grid item xs={12} md={4} key={index}>
+									<Button
+										variant="outlined"
+										color="inherit"
+										className={classes.button}
+										onClick={(e) => handleCategory(category)}
+									>
+										{category}
+									</Button>
+								</Grid>
+							);
+						})
+					) : (
+						<Loader />
+					)}
 				</Grid>
-                </Container>
-			)}
+				{bookList.length > 0 && (
+					<React.Fragment>
+						<h1>Books</h1>
+						<Grid container spacing={3}>
+							{bookList.map((book, index) => {
+								return (
+									<Grid item xs={12} md={3} key={index}>
+										<Book info={book} />
+									</Grid>
+								);
+							})}
+						</Grid>
+					</React.Fragment>
+				)}
+			</Container>
 		</div>
 	);
 };
