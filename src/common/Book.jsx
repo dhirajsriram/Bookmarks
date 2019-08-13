@@ -13,6 +13,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { withRouter } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
+	card: {
+		maxWidth: 345
+	},
 	pointer: {},
 	media: {
 		height: 0,

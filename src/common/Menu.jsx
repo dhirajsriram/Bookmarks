@@ -5,6 +5,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Badge from '@material-ui/core/Badge';
 import { withRouter } from "react-router";
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 
 const useStyles = makeStyles({
   root: {
@@ -64,6 +66,14 @@ const Menu = (props) => {
                 Bookmarks
               </Badge>
             } />
+            <IconButton
+              edge="end"
+              aria-label="account of current user"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <Icon>account_circle</Icon>
+            </IconButton>
       </Tabs>
     </Paper>
   );
