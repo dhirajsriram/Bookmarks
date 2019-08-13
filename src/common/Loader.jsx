@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles(theme => ({
   root:{
+    display:"block",
     margin:"auto"
   },
   progress: {
@@ -16,7 +16,7 @@ export default function CircularIndeterminate() {
 
   return (
     <div className={classes.root}> 
-      <CircularProgress className={classes.progress} color="inherit"/>
+      <img className={classes.root} src={require("../assets/book.gif")} alt="books-loader"/>
     </div>
   );
 }

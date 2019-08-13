@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 		cursor: 'pointer'
 	},
 	header: {
-		cursor: 'pointer'
+		cursor: 'pointer',
 	},
 	expand: {
 		transform: 'rotate(0deg)',

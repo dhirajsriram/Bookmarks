@@ -33,7 +33,7 @@ const Home = (props) => {
 						{props.books.totalItems ? (
 							props.books.items.map((book, index) => {
 								return (
-									<Grid item xs={12} md={3} key={index}>
+									<Grid item xs={12} sm={6} md={3} key={index}>
 										<Book bookmarks={props.bookmarks} onBookmark={handleBookmark} info={book} />
 									</Grid>
 								);

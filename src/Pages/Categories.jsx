@@ -63,7 +63,6 @@ const Categories = (props) => {
 										label={category}
 										className={classes.chip}
 										component="a"
-										href="#chip"
 										clickable
 										onClick={(e) => handleCategory(category)}
 										color="secondary"
@@ -81,7 +80,7 @@ const Categories = (props) => {
 						<Grid container spacing={3}>
 							{bookList.map((book, index) => {
 								return (
-									<Grid item xs={12} md={3} key={index}>
+									<Grid item xs={12} sm={6} md={3} key={index}>
 										<Book bookmarks={props.bookmarks} onBookmark={handleBookmark} info={book} />
 									</Grid>
 								);
