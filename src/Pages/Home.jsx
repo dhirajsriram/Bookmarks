@@ -27,7 +27,6 @@ const Home = (props) => {
 	return (
 		<div className={classes.home}>
 			<Container>
-				
 				<div className={classes.root}>
 						{props.books.totalItems ? (
 							<React.Fragment><h1>Welcome to this sample book app!</h1>

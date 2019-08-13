@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   root:{
     display:"block",
-    margin:"auto"
+    margin:"auto",
+    width:"100%"
   },
   progress: {
     margin: theme.spacing(2),
