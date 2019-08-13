@@ -6,17 +6,19 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import Fab from '@material-ui/core/Fab';
+import Icon from '@material-ui/core/Icon';
 
 const useStyles = makeStyles((theme) => ({
 	home: {
 		fontSize: 24,
 		marginTop: 40
 	},
-	media:{
-		width : "100%",
-		"@media (max-width: 600px)": {
-			margin:"20px 0px"
-		  }
+	media: {
+		width: '100%',
+		'@media (max-width: 600px)': {
+			margin: '20px 0px'
+		}
 	},
 	root: {
 		padding: theme.spacing(3, 2)
@@ -24,15 +26,15 @@ const useStyles = makeStyles((theme) => ({
 	menuButton: {
 		marginRight: theme.spacing(2)
 	},
-	favourite:{
-		color:"red"
+	favourite: {
+		color: 'red'
 	},
-	author:{
-		fontStyle:"Italic",
-		color: "#3c3c3c9e"
+	author: {
+		fontStyle: 'Italic',
+		color: '#3c3c3c9e'
 	},
-	description:{
-		marginTop:20
+	description: {
+		marginTop: 20
 	}
 }));
 
@@ -53,13 +55,27 @@ const Home = (props) => {
 						<Grid container justify="space-between">
 							<Grid item md={8}>
 								<Typography variant="h4" fontWeight="fontWeightBold" component="h2">
-									{props.book[0].volumeInfo.title} 
-									<IconButton aria-label="add to favorites" color={props.bookmarks.some(bookmark => bookmark.id === props.book[0].id) ? "secondary":"default"} onClick={(e) => handleBookmark(props.book[0])}>
+									{props.book[0].volumeInfo.title}
+									<IconButton
+										aria-label="add to favorites"
+										color={
+											props.bookmarks.some((bookmark) => bookmark.id === props.book[0].id) ? (
+												'secondary'
+											) : (
+												'default'
+											)
+										}
+										onClick={(e) => handleBookmark(props.book[0])}
+									>
 										<FavoriteIcon />
 									</IconButton>
 								</Typography>
-								<Typography className={classes.author} component="p">- {props.book[0].volumeInfo.authors[0]}</Typography>
-								<Typography className={classes.description} component="p">{props.book[0].volumeInfo.description}</Typography>
+								<Typography className={classes.author} component="p">
+									- {props.book[0].volumeInfo.authors[0]}
+								</Typography>
+								<Typography className={classes.description} component="p">
+									{props.book[0].volumeInfo.description}
+								</Typography>
 							</Grid>
 
 							<Grid item md={3}>
@@ -70,6 +86,9 @@ const Home = (props) => {
 								/>
 							</Grid>
 						</Grid>
+						<Fab color="secondary" aria-label="add" className={classes.fab}>
+							<Icon>play_arrow</Icon>
+						</Fab>
 					</Paper>
 				</Container>
 			)}
