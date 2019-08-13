@@ -8,8 +8,6 @@ import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { Link } from "react-router-dom";
 import Loader from "../common/Loader";
-import Fab from '@material-ui/core/Fab';
-import Icon from '@material-ui/core/Icon';
 
 const useStyles = makeStyles(theme => ({
   home: {
@@ -110,9 +108,6 @@ const Home = props => {
                 />
               </Grid>
             </Grid>
-			<Fab color="secondary" aria-label="add" className={classes.fab}>
-					<Icon>play_arrow</Icon>
-				</Fab>
           </Paper>
         ) : (
           <Loader />

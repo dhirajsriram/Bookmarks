@@ -4,8 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Book from '../common/Book';
 import { Container } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import Fab from '@material-ui/core/Fab';
-import Icon from '@material-ui/core/Icon';
 
 let bookmarks = [];
 const useStyles = makeStyles((theme) => ({
@@ -56,11 +54,6 @@ const Bookmarks = (props) => {
 					</Grid>
 				</div>
 			</div>
-			{props.books.length > 0 && (
-				<Fab color="secondary" aria-label="add" className={classes.fab}>
-					<Icon>play_arrow</Icon>
-				</Fab>
-			)}
 		</Container>
 	);
 };
