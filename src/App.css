@@ -1,3 +1,6 @@
+.text-align-left{
+  text-align: left
+}
 .MuiToolbar-root{
   display: flex;
   margin: auto;
@@ -22,7 +25,12 @@
   overflow: hidden;
   text-overflow: ellipsis !important;
 }
-.MuiSnackbarContent-message{
-  text-align: center;
-  margin: auto
+.Mui-selected{
+  color:#ee1260 !important
+}
+.MuiSnackbarContent-root{
+  background-color:#ee1260 !important
+}
+.material-icons{
+  vertical-align: middle;
 }

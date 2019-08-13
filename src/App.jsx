@@ -36,7 +36,7 @@ function App() {
 	function handleBookmarks(value) {
 		setState({
 			...openSnack,
-			message: 'Book added to bookmarks ✔️'
+			message: '<i class="material-icons">check_circle</i> Book added to bookmarks'
 		});
 		if (bookmarks.length > 0) {
 			if (!bookmarks.find((x) => x.id === value.id)) {
@@ -44,7 +44,7 @@ function App() {
 			} else {
 				setState({
 					...openSnack,
-					message: 'Book already bookmarked ⚠️'
+					message: '<i class="material-icons">error</i>  Book already bookmarked '
 				});
 			}
 		} else {
@@ -61,7 +61,7 @@ function App() {
 			bookmarkArr.splice(bookmarkArr.indexOf(bookmarks.find((x) => x.id === value.id)), 1);
 			setState({
 				...openSnack,
-				message: 'Book removed from bookmarks ❌'
+				message: '<i class="material-icons">delete_forever</i> Book removed from bookmarks'
 			});
 			setTimeout(() => {
 				setState(closeSnack);
@@ -102,7 +102,7 @@ function App() {
 					ContentProps={{
 						'aria-describedby': 'message-id'
 					}}
-					message={<div id="message-id">{state.message}</div>}
+					message={<div id="message-id" dangerouslySetInnerHTML={{__html:state.message}}></div>}
 				/>
 			</div>
 		</div>

@@ -53,17 +53,18 @@ const Categories = (props) => {
 	return (
 		<div className={classes.home}>
 			<Container>
-				<h1>Categories</h1>
-				<Grid container spacing={1}>
+				
+				
 					{categories.length > 0 ? (
-						categories.map((category, index) => {
+						<React.Fragment><h1 className="text-align-left">Categories</h1>
+						<Grid container spacing={1}>
+						{categories.map((category, index) => {
 							return (
 								<Grid item key={index}>
 									<Chip
 										label={category}
 										className={classes.chip}
 										component="a"
-										href="#chip"
 										clickable
 										onClick={(e) => handleCategory(category)}
 										color="secondary"
@@ -71,17 +72,16 @@ const Categories = (props) => {
 								</Grid>
 							);
 						})
-					) : (
+					}</Grid></React.Fragment>) : (
 						<Loader />
 					)}
-				</Grid>
 				{bookList.length > 0 && (
 					<React.Fragment>
-						<h1>Books</h1>
+						<h1 className="text-align-left">Books</h1>
 						<Grid container spacing={3}>
 							{bookList.map((book, index) => {
 								return (
-									<Grid item xs={12} md={3} key={index}>
+									<Grid item xs={12} sm={6} md={3} key={index}>
 										<Book bookmarks={props.bookmarks} onBookmark={handleBookmark} info={book} />
 									</Grid>
 								);

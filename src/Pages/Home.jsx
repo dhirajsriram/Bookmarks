@@ -27,21 +27,20 @@ const Home = (props) => {
 	return (
 		<div className={classes.home}>
 			<Container>
-				<h1>Welcome to this sample book app!</h1>
 				<div className={classes.root}>
-					<Grid container spacing={3}>
 						{props.books.totalItems ? (
-							props.books.items.map((book, index) => {
+							<React.Fragment><h1>Welcome to this sample book app!</h1>
+							<Grid container spacing={3}>
+							{props.books.items.map((book, index) => {
 								return (
-									<Grid item xs={12} md={3} key={index}>
+									<Grid item xs={12} sm={6} md={3} key={index}>
 										<Book bookmarks={props.bookmarks} onBookmark={handleBookmark} info={book} />
 									</Grid>
 								);
-							})
-						) : (
-							<Loader />
+							})}</Grid>
+						</React.Fragment> ): (<Grid>
+							<Loader /></Grid>
 						)}
-					</Grid>
 				</div>
 			</Container>
 		</div>
